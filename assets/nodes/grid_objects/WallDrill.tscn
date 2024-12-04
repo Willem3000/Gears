@@ -1,0 +1,133 @@
+[gd_scene load_steps=24 format=3 uid="uid://btsn6jmk7t6a8"]
+
+[ext_resource type="Script" path="res://assets/scripts/WallDrill.gd" id="1_g1wfd"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="2_7le2i"]
+[ext_resource type="Texture2D" uid="uid://bkel3qudyl4yj" path="res://assets/sprites/WallDrill.png" id="3_2f62p"]
+[ext_resource type="Texture2D" uid="uid://chrxcu0jyeqyh" path="res://assets/sprites/StoneChunkParticle.png" id="4_uhjh3"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="5_a7ako"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="6_6w6l0"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="7_jlgno"]
+[ext_resource type="AudioStream" uid="uid://wp3q6mp1ilrv" path="res://assets/sound/sound_effects/WallDrilling.mp3" id="8_qvou3"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="9_omygi"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="10_sc4ib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bk5j7"]
+resource_local_to_scene = true
+shader = ExtResource("2_7le2i")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd1c2"]
+atlas = ExtResource("3_2f62p")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx242"]
+atlas = ExtResource("3_2f62p")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gq7mx"]
+atlas = ExtResource("3_2f62p")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tetha"]
+atlas = ExtResource("3_2f62p")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpvkj"]
+atlas = ExtResource("3_2f62p")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jrmod"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd1c2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx242")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gq7mx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tetha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpvkj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lpqab"]
+shader = ExtResource("2_7le2i")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_8as1b"]
+offsets = PackedFloat32Array(0.815789, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_e1770"]
+gradient = SubResource("Gradient_8as1b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qnyot"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(9, 0, 0)
+initial_velocity_min = -160.0
+initial_velocity_max = -80.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.25
+color_ramp = SubResource("GradientTexture1D_e1770")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfrc7"]
+atlas = ExtResource("4_uhjh3")
+region = Rect2(0, 0, 2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xj11a"]
+size = Vector2(4, 18)
+
+[node name="WallDrill" type="Node2D"]
+script = ExtResource("1_g1wfd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 10
+z_as_relative = false
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_bk5j7")
+sprite_frames = SubResource("SpriteFrames_jrmod")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 20
+material = SubResource("ShaderMaterial_lpqab")
+process_material = SubResource("ParticleProcessMaterial_qnyot")
+texture = SubResource("AtlasTexture_nfrc7")
+lifetime = 0.15
+
+[node name="Rotary" parent="." instance=ExtResource("5_a7ako")]
+
+[node name="MachinePart" parent="." instance=ExtResource("6_6w6l0")]
+
+[node name="Placeable" parent="." instance=ExtResource("7_jlgno")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_xj11a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-2, 0)
+polygon = PackedVector2Array(-2, -6, -2, 6, 10, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_qvou3")
+volume_db = -15.0
+pitch_scale = 1.1
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("9_omygi")
+break_effect_pack = ExtResource("10_sc4ib")

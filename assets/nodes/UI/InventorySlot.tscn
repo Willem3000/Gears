@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://ppoov7beikkd"]
+
+[ext_resource type="Script" path="res://assets/scripts/InventorySlot.gd" id="1_2wqvd"]
+[ext_resource type="Texture2D" uid="uid://gdvkvhsgjxk7" path="res://assets/sprites/icons/SmallCogIcon.png" id="2_lr1uq"]
+
+[sub_resource type="SystemFont" id="SystemFont_qyjl8"]
+font_names = PackedStringArray("Connection II")
+hinting = 0
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_7fvcf"]
+font_names = PackedStringArray("Peepo")
+subpixel_positioning = 0
+
+[node name="InventorySlot" type="Panel"]
+light_mask = 0
+custom_minimum_size = Vector2(50, 50)
+script = ExtResource("1_2wqvd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 25.0
+offset_bottom = 25.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_lr1uq")
+
+[node name="Label" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = -1.0
+offset_top = 32.0
+offset_right = 49.0
+offset_bottom = 52.0
+theme_override_fonts/font = SubResource("SystemFont_qyjl8")
+theme_override_font_sizes/font_size = 20
+text = "100"
+horizontal_alignment = 2
+
+[node name="ItemDescription" type="ItemList" parent="."]
+visible = false
+light_mask = 0
+z_index = 41
+layout_mode = 0
+offset_right = 116.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_fonts/font = SubResource("SystemFont_7fvcf")
+theme_override_font_sizes/font_size = 18
+allow_search = false
+auto_height = true
+item_count = 1
+icon_scale = 2.0
+item_0/text = "Stone Chunk"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

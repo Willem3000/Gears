@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://40hdq423if6"]
+
+[ext_resource type="Texture2D" uid="uid://bafhumcp234fw" path="res://assets/sprites/CogSmall.png" id="1_3etam"]
+[ext_resource type="Script" path="res://assets/scenes/ObjectGrid.gd" id="1_58n3g"]
+[ext_resource type="Script" path="res://assets/scenes/SmallCog.gd" id="2_bnqin"]
+[ext_resource type="Script" path="res://assets/scenes/Grabbable.gd" id="2_ro7n0"]
+[ext_resource type="Texture2D" uid="uid://bgu61myiy68ob" path="res://assets/sprites/CogLarge.png" id="4_at0u8"]
+[ext_resource type="Script" path="res://assets/scenes/Rotary.gd" id="4_h8cfk"]
+
+[node name="Overworld" type="Node2D"]
+
+[node name="ObjectGrid" type="Node2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("1_58n3g")
+
+[node name="SmallCog" type="Node2D" parent="ObjectGrid"]
+position = Vector2(100, 100)
+script = ExtResource("2_bnqin")
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjectGrid/SmallCog"]
+scale = Vector2(12, 12)
+texture = ExtResource("1_3etam")
+
+[node name="Grabbable" type="Node2D" parent="ObjectGrid/SmallCog"]
+script = ExtResource("2_ro7n0")
+
+[node name="Rotary" type="Node2D" parent="ObjectGrid/SmallCog"]
+script = ExtResource("4_h8cfk")
+rotation_speed = 2
+
+[node name="LargeCog" type="Node2D" parent="ObjectGrid"]
+position = Vector2(300, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjectGrid/LargeCog"]
+scale = Vector2(12, 12)
+texture = ExtResource("4_at0u8")
+
+[node name="Grabbable" type="Node2D" parent="ObjectGrid/LargeCog"]
+script = ExtResource("2_ro7n0")
+
+[node name="Rotary" type="Node2D" parent="ObjectGrid/LargeCog"]
+script = ExtResource("4_h8cfk")
+
+[node name="LargeCog2" type="Node2D" parent="ObjectGrid"]
+position = Vector2(300, 500)
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjectGrid/LargeCog2"]
+scale = Vector2(12, 12)
+texture = ExtResource("4_at0u8")
+
+[node name="Grabbable" type="Node2D" parent="ObjectGrid/LargeCog2"]
+script = ExtResource("2_ro7n0")
+
+[node name="Rotary" type="Node2D" parent="ObjectGrid/LargeCog2"]
+script = ExtResource("4_h8cfk")
+
+[node name="Engine" type="Node2D" parent="ObjectGrid"]

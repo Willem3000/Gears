@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://40hdq423if6"]
+
+[ext_resource type="Script" path="res://assets/scripts/ObjectGrid.gd" id="1_58n3g"]
+[ext_resource type="PackedScene" uid="uid://sly0kb3hlygt" path="res://assets/nodes/Engine.tscn" id="2_j6p6w"]
+[ext_resource type="PackedScene" uid="uid://qubh84rcb0t3" path="res://assets/nodes/SmallCog.tscn" id="3_l0r6w"]
+[ext_resource type="PackedScene" uid="uid://b6rwx7n10jf2b" path="res://assets/nodes/LargeCog.tscn" id="4_fx36r"]
+[ext_resource type="PackedScene" uid="uid://dxpumxqrovykw" path="res://assets/nodes/Robot.tscn" id="5_au07l"]
+[ext_resource type="PackedScene" uid="uid://b86nkx0b13gjb" path="res://assets/nodes/Cursor.tscn" id="6_jjoc5"]
+[ext_resource type="PackedScene" uid="uid://c2fw7818pcve8" path="res://assets/nodes/components/Inventory.tscn" id="6_qv5i3"]
+[ext_resource type="Script" path="res://assets/scripts/Camera.gd" id="7_jnr8u"]
+[ext_resource type="Script" path="res://assets/scripts/ObjectGridSelector.gd" id="8_qul4y"]
+
+[node name="Overworld" type="Node2D"]
+
+[node name="ObjectGrid" type="Node2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("1_58n3g")
+
+[node name="Engine" parent="ObjectGrid" instance=ExtResource("2_j6p6w")]
+
+[node name="SmallCog" parent="ObjectGrid" instance=ExtResource("3_l0r6w")]
+
+[node name="LargeCog" parent="ObjectGrid" instance=ExtResource("4_fx36r")]
+
+[node name="SmallCog2" parent="ObjectGrid" instance=ExtResource("3_l0r6w")]
+
+[node name="LargeCog2" parent="ObjectGrid" instance=ExtResource("4_fx36r")]
+
+[node name="Robot" parent="." instance=ExtResource("5_au07l")]
+
+[node name="Cursor" parent="." node_paths=PackedStringArray("ObjectGrid") instance=ExtResource("6_jjoc5")]
+ObjectGrid = NodePath("../ObjectGrid")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow")]
+position = Vector2(0, -256)
+offset = Vector2(0, -150)
+zoom = Vector2(0.555, 0.555)
+position_smoothing_enabled = true
+position_smoothing_speed = 13.905
+script = ExtResource("7_jnr8u")
+follow = NodePath("../Robot")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ObjectGridSelector" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_qul4y")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ObjectGridSelector"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 644.0
+color = Color(1, 1, 1, 0)
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_qv5i3")]
+offset_left = 579.0
+offset_top = 188.0
+offset_right = 579.0
+offset_bottom = 188.0
+
+[connection signal="gui_input" from="CanvasLayer/ObjectGridSelector/ColorRect" to="CanvasLayer/ObjectGridSelector" method="_on_color_rect_gui_input"]

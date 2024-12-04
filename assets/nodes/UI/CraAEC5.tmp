@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cavoqjnentc1t"]
+
+[ext_resource type="Script" path="res://assets/scripts/CraftingSlot.gd" id="1_krteq"]
+
+[node name="CraftingSlot" type="Panel"]
+custom_minimum_size = Vector2(50, 50)
+script = ExtResource("1_krteq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+stretch_mode = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

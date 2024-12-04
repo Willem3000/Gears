@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://40hdq423if6"]
+
+[ext_resource type="Texture2D" uid="uid://bafhumcp234fw" path="res://assets/sprites/CogSmall.png" id="1_3etam"]
+[ext_resource type="Script" path="res://assets/scenes/Grabbable.gd" id="2_ro7n0"]
+
+[node name="Overworld" type="Node2D"]
+
+[node name="SmallCog" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallCog"]
+position = Vector2(100, 100)
+scale = Vector2(10, 10)
+texture = ExtResource("1_3etam")
+
+[node name="Grabbable" type="Node" parent="SmallCog"]
+script = ExtResource("2_ro7n0")

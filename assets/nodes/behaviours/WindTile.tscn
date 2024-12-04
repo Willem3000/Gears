@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgtahro00ptbw"]
+
+[ext_resource type="Script" path="res://assets/scripts/WindTile.gd" id="1_bmnv4"]
+
+[sub_resource type="Gradient" id="Gradient_2k5rq"]
+offsets = PackedFloat32Array(0, 0.175, 0.753125, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ud4mc"]
+gradient = SubResource("Gradient_2k5rq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f7uto"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-96, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 70, 1)
+spread = 1.846
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 12.0
+scale_max = 12.0
+color = Color(1, 1, 1, 0.384314)
+color_ramp = SubResource("GradientTexture1D_ud4mc")
+turbulence_noise_strength = 13.71
+turbulence_noise_scale = 11.64
+
+[node name="WindTile" type="Node2D"]
+script = ExtResource("1_bmnv4")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_material = SubResource("ParticleProcessMaterial_f7uto")
+lifetime = 3.0
+speed_scale = 5.0

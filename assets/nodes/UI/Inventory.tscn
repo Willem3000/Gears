@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2fw7818pcve8"]
+
+[ext_resource type="Script" path="res://assets/scripts/Inventory.gd" id="1_apxu3"]
+[ext_resource type="Texture2D" uid="uid://bcqacuxdersjw" path="res://assets/sprites/MenuBG.png" id="2_27ueg"]
+[ext_resource type="Script" path="res://assets/nodes/UI/LineScrollEffect.gd" id="3_7chao"]
+[ext_resource type="PackedScene" uid="uid://ppoov7beikkd" path="res://assets/nodes/UI/InventorySlot.tscn" id="4_rq3uj"]
+[ext_resource type="Animation" uid="uid://vg1aou7xluw1" path="res://assets/animations/OpenInventory.res" id="5_765ps"]
+[ext_resource type="Texture2D" uid="uid://belj5nx4bmar" path="res://assets/sprites/Robot.png" id="8_5hy73"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iw0wq"]
+texture = ExtResource("2_27ueg")
+expand_margin_top = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t8f0o"]
+_data = {
+"OpenInventory": ExtResource("5_765ps")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3ho4"]
+atlas = ExtResource("8_5hy73")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_apxu3")
+
+[node name="LinesMask" type="Panel" parent="."]
+show_behind_parent = true
+clip_contents = true
+layout_mode = 0
+offset_left = -121.0
+offset_top = -123.0
+offset_right = 122.0
+offset_bottom = 124.0
+
+[node name="Lines" type="Panel" parent="LinesMask"]
+modulate = Color(1, 1, 1, 0.745098)
+layout_mode = 0
+offset_right = 243.0
+offset_bottom = 247.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_iw0wq")
+script = ExtResource("3_7chao")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = -106.0
+offset_top = -62.0
+offset_right = 106.0
+offset_bottom = 113.0
+columns = 4
+
+[node name="InventorySlot" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot2" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot3" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot4" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot5" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot11" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="GridContainer" instance=ExtResource("4_rq3uj")]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t8f0o")
+}
+speed_scale = 2.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+offset_left = -16.0
+offset_top = -112.0
+offset_right = 16.0
+offset_bottom = -80.0
+texture = SubResource("AtlasTexture_f3ho4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0

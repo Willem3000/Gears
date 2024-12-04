@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://c2rtuoyws04nl"]
+
+[ext_resource type="Texture2D" uid="uid://dcsto1di8gqrt" path="res://assets/sprites/CopperChunk.png" id="1_325cw"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="2_xmnm2"]
+
+[resource]
+script = ExtResource("2_xmnm2")
+item_name = "Copper Chunk"
+icon = ExtResource("1_325cw")
+quantity = 1

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://bnp2ucidi1ypj"]
+
+[ext_resource type="Texture2D" uid="uid://oihjrlxo0k4f" path="res://assets/sprites/icons/WallDrillIcon.png" id="1_u8rv7"]
+[ext_resource type="PackedScene" uid="uid://btsn6jmk7t6a8" path="res://assets/nodes/grid_objects/WallDrill.tscn" id="2_shhm3"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="3_7yxvt"]
+
+[resource]
+script = ExtResource("3_7yxvt")
+item_name = "Wall Drill"
+packed = ExtResource("2_shhm3")
+icon = ExtResource("1_u8rv7")
+quantity = 1

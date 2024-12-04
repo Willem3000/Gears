@@ -1,0 +1,75 @@
+[gd_scene load_steps=13 format=3 uid="uid://c0imu3x1x2v5"]
+
+[ext_resource type="Script" path="res://assets/scripts/Vacuum.gd" id="1_e2tjo"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="2_jwbp2"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="3_wp2jj"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="4_bpr2l"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="5_v4bns"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="6_irnka"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="7_83cxo"]
+[ext_resource type="Texture2D" uid="uid://dpkipxetf8b7q" path="res://assets/sprites/VacuumChest.png" id="8_kkbp0"]
+[ext_resource type="PackedScene" uid="uid://b2fmo0i1scr7r" path="res://assets/nodes/miscellaneous/FullPointLight2D.tscn" id="10_ko87q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fm78i"]
+shader = ExtResource("7_83cxo")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8gdd"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv02i"]
+size = Vector2(2, 2)
+
+[node name="Vacuum" type="Node2D"]
+script = ExtResource("1_e2tjo")
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("2_jwbp2")
+break_effect_pack = ExtResource("3_wp2jj")
+
+[node name="Placeable" parent="." instance=ExtResource("4_bpr2l")]
+
+[node name="Rotary" parent="." instance=ExtResource("5_v4bns")]
+
+[node name="MachinePart" parent="." instance=ExtResource("6_irnka")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_fm78i")
+position = Vector2(0, 3)
+texture = ExtResource("8_kkbp0")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 20)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 40
+position = Vector2(0, 3)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8, 9)
+shape = SubResource("RectangleShape2D_c8gdd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8, -6)
+shape = SubResource("RectangleShape2D_iv02i")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8, 9)
+shape = SubResource("RectangleShape2D_iv02i")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8, -6)
+shape = SubResource("RectangleShape2D_iv02i")
+
+[node name="FullPointLight2D" parent="." instance=ExtResource("10_ko87q")]
+position = Vector2(27, -7)
+radius = 0.376471
+intensity = 4.78
+
+[node name="VacuumPosition" type="Node2D" parent="."]
+position = Vector2(0, 4)
+
+[connection signal="changed_rotation" from="Rotary" to="." method="_on_rotary_changed_rotation"]

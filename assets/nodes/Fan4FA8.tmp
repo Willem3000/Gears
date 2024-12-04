@@ -1,0 +1,72 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5bcgtvplwas8"]
+
+[ext_resource type="Script" path="res://assets/scripts/Fan.gd" id="1_ubnom"]
+[ext_resource type="Texture2D" uid="uid://drdfa3u8i3k7k" path="res://assets/sprites/Fan.png" id="2_37c7d"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/components/Rotary.tscn" id="4_7uir8"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/components/MachinePart.tscn" id="5_36h65"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/components/Grabbable.tscn" id="6_d0fmw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqv6l"]
+atlas = ExtResource("2_37c7d")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s68sy"]
+atlas = ExtResource("2_37c7d")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir4b0"]
+atlas = ExtResource("2_37c7d")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nbql"]
+atlas = ExtResource("2_37c7d")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaaq8"]
+atlas = ExtResource("2_37c7d")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qt6tx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqv6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s68sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir4b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nbql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaaq8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="Fan" type="Node2D"]
+script = ExtResource("1_ubnom")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(12, 12)
+sprite_frames = SubResource("SpriteFrames_qt6tx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(12, 12)
+texture = ExtResource("2_37c7d")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 20)
+
+[node name="Rotary" parent="." instance=ExtResource("4_7uir8")]
+
+[node name="MachinePart" parent="." instance=ExtResource("5_36h65")]
+
+[node name="Grabbable" parent="." instance=ExtResource("6_d0fmw")]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://m4kvfsommhvn"]
+
+[ext_resource type="Script" path="res://assets/scripts/VortexTile.gd" id="1_s4cff"]
+
+[sub_resource type="Gradient" id="Gradient_l44o7"]
+offsets = PackedFloat32Array(0, 0.234375, 0.78125, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ok6v"]
+gradient = SubResource("Gradient_l44o7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2njxt"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-96, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 70, 1)
+spread = 1.846
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 12.0
+scale_max = 12.0
+color = Color(1, 1, 1, 0.462745)
+color_ramp = SubResource("GradientTexture1D_3ok6v")
+turbulence_noise_strength = 13.71
+turbulence_noise_scale = 11.64
+
+[node name="VortexTile" type="Node2D"]
+script = ExtResource("1_s4cff")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -1)
+process_material = SubResource("ParticleProcessMaterial_2njxt")
+lifetime = 2.0
+speed_scale = 5.0

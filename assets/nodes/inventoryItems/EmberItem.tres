@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://3v6pkiiqy4tw"]
+
+[ext_resource type="Texture2D" uid="uid://bqs70rl11c5n" path="res://assets/sprites/Ember.png" id="1_j4jek"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="2_6q2ex"]
+
+[resource]
+script = ExtResource("2_6q2ex")
+item_name = "Ember"
+icon = ExtResource("1_j4jek")
+quantity = 1

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e2pdlxv670ee"]
+
+[ext_resource type="Script" path="res://assets/scripts/Rotary.gd" id="1_e3wm0"]
+
+[node name="Rotary" type="Node2D"]
+script = ExtResource("1_e3wm0")

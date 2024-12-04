@@ -1,0 +1,128 @@
+[gd_scene load_steps=28 format=3 uid="uid://3dgt6faxuo1j"]
+
+[ext_resource type="Script" path="res://assets/scripts/CraftingRecipe.gd" id="1_rj7yd"]
+[ext_resource type="Resource" uid="uid://bgj6tk35isra4" path="res://assets/nodes/inventoryItems/SmallCogItem.tres" id="2_do1va"]
+[ext_resource type="Script" path="res://assets/scripts/Ingredient.gd" id="3_0ec2a"]
+[ext_resource type="Resource" uid="uid://c7pq2on8s87ak" path="res://assets/nodes/inventoryItems/DrillItem.tres" id="4_brrck"]
+[ext_resource type="Resource" uid="uid://b2yosj8m3j57g" path="res://assets/nodes/inventoryItems/StoneChunkItem.tres" id="4_g8kst"]
+[ext_resource type="Resource" uid="uid://2jeht1xgdu46" path="res://assets/nodes/inventoryItems/LargeCogItem.tres" id="4_xf5g2"]
+[ext_resource type="Resource" uid="uid://dc0px4pyk6rvf" path="res://assets/nodes/inventoryItems/IronChunkItem.tres" id="6_p06gs"]
+[ext_resource type="Resource" uid="uid://duaeuow1aulsx" path="res://assets/nodes/inventoryItems/FanItem.tres" id="8_lph4w"]
+[ext_resource type="Resource" uid="uid://pmmnxuo4t2jx" path="res://assets/nodes/inventoryItems/TubeItem.tres" id="9_bsmip"]
+[ext_resource type="Resource" uid="uid://c2rtuoyws04nl" path="res://assets/nodes/inventoryItems/CopperChunkItem.tres" id="10_ay7cp"]
+[ext_resource type="Resource" uid="uid://bkjn4japed7n5" path="res://assets/nodes/inventoryItems/TubeFanItem.tres" id="10_lx8o4"]
+[ext_resource type="Resource" uid="uid://bnp2ucidi1ypj" path="res://assets/nodes/inventoryItems/WallDrillItem.tres" id="11_1bgwx"]
+[ext_resource type="Resource" uid="uid://dchuk66g4qlmy" path="res://assets/nodes/inventoryItems/EngineItem.tres" id="12_vyaej"]
+[ext_resource type="Resource" uid="uid://dym4akwn7mx54" path="res://assets/nodes/inventoryItems/LaserDrillItem.tres" id="14_hmnst"]
+[ext_resource type="Resource" uid="uid://de40rkgmq4144" path="res://assets/nodes/inventoryItems/VacuumItem.tres" id="15_ptqw5"]
+
+[sub_resource type="Resource" id="Resource_uw20e"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("4_g8kst")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_omtnp"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("4_g8kst")
+quantity = 20
+
+[sub_resource type="Resource" id="Resource_oya82"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("2_do1va")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_rdbwk"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("6_p06gs")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_c4bgc"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("10_ay7cp")
+quantity = 3
+
+[sub_resource type="Resource" id="Resource_ru37w"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("9_bsmip")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_2d1ag"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("8_lph4w")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_vqns0"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("10_ay7cp")
+quantity = 10
+
+[sub_resource type="Resource" id="Resource_l1lle"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("2_do1va")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_v87nw"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("6_p06gs")
+quantity = 50
+
+[sub_resource type="Resource" id="Resource_ssxug"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("4_g8kst")
+quantity = 50
+
+[sub_resource type="Resource" id="Resource_s3vyg"]
+script = ExtResource("3_0ec2a")
+item = ExtResource("9_bsmip")
+quantity = 1
+
+[node name="Recipes" type="Node"]
+
+[node name="SmallCog" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("2_do1va")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_uw20e")])
+
+[node name="LargeCog" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("4_xf5g2")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_omtnp")])
+
+[node name="Drill" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("4_brrck")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_oya82"), SubResource("Resource_rdbwk")])
+
+[node name="Fan" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("8_lph4w")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_oya82"), SubResource("Resource_rdbwk")])
+
+[node name="Tube" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("9_bsmip")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_c4bgc")])
+
+[node name="TubeFan" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("10_lx8o4")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_ru37w"), SubResource("Resource_2d1ag"), SubResource("Resource_vqns0")])
+
+[node name="WallDrill" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("11_1bgwx")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_oya82"), SubResource("Resource_rdbwk")])
+
+[node name="Engine" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("12_vyaej")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_l1lle"), SubResource("Resource_v87nw"), SubResource("Resource_ssxug"), SubResource("Resource_s3vyg")])
+
+[node name="LaserDrill" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("14_hmnst")
+ingredients = Array[ExtResource("3_0ec2a")]([SubResource("Resource_l1lle"), SubResource("Resource_v87nw")])
+
+[node name="Vacuum" type="Node" parent="."]
+script = ExtResource("1_rj7yd")
+craftable = ExtResource("15_ptqw5")

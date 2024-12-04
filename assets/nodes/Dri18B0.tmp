@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://dg7ey2o2w0ba6"]
+
+[ext_resource type="Script" path="res://assets/scripts/Drill.gd" id="1_l7ma5"]
+[ext_resource type="Texture2D" uid="uid://cp1o6r1lcidoi" path="res://assets/sprites/Drill.png" id="2_5grlf"]
+[ext_resource type="Texture2D" uid="uid://bx5jth6r6xl3" path="res://assets/nodes/effects/DrillParticleEmberRamp.tres" id="2_dofml"]
+[ext_resource type="Texture2D" uid="uid://j2um5uebcped" path="res://assets/sprites/CogSmallBackdrop.png" id="2_ohh67"]
+[ext_resource type="Texture2D" uid="uid://dd1gna2h4hoqm" path="res://assets/sprites/EmberParticle.png" id="3_ej2qj"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/components/Rotary.tscn" id="3_rhq8y"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/components/MachinePart.tscn" id="4_c4ni2"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/components/Grabbable.tscn" id="5_8mics"]
+[ext_resource type="Script" path="res://assets/nodes/SpriteStack.gd" id="7_tn4hx"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0qnta"]
+direction = Vector3(0, -10, 0)
+spread = 15.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1300.0
+gravity = Vector3(0, 2000, 0)
+scale_min = 12.0
+scale_max = 12.0
+color_ramp = ExtResource("2_dofml")
+
+[node name="Drill" type="Node2D"]
+script = ExtResource("1_l7ma5")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 5
+position = Vector2(-3, 44)
+process_material = SubResource("ParticleProcessMaterial_0qnta")
+texture = ExtResource("3_ej2qj")
+
+[node name="Rotary" parent="." instance=ExtResource("3_rhq8y")]
+
+[node name="MachinePart" parent="." instance=ExtResource("4_c4ni2")]
+
+[node name="Grabbable" parent="." instance=ExtResource("5_8mics")]
+
+[node name="SpriteStack" type="Node2D" parent="."]
+script = ExtResource("7_tn4hx")
+
+[node name="Sprite2D1" type="Sprite2D" parent="SpriteStack"]
+position = Vector2(0, 12)
+scale = Vector2(12, 12)
+texture = ExtResource("2_ohh67")
+
+[node name="Sprite2D2" type="Sprite2D" parent="SpriteStack"]
+z_index = 1
+position = Vector2(0, 36)
+scale = Vector2(12, 12)
+texture = ExtResource("2_5grlf")
+region_enabled = true
+region_rect = Rect2(80, 0, 20, 20)
+
+[node name="Sprite2D3" type="Sprite2D" parent="SpriteStack"]
+z_index = 2
+position = Vector2(0, 24)
+scale = Vector2(12, 12)
+texture = ExtResource("2_5grlf")
+region_enabled = true
+region_rect = Rect2(60, 0, 20, 20)
+
+[node name="Sprite2D4" type="Sprite2D" parent="SpriteStack"]
+z_index = 3
+position = Vector2(0, 12)
+scale = Vector2(12, 12)
+texture = ExtResource("2_5grlf")
+region_enabled = true
+region_rect = Rect2(40, 0, 20, 20)
+
+[node name="Sprite2D5" type="Sprite2D" parent="SpriteStack"]
+z_index = 4
+scale = Vector2(12, 12)
+texture = ExtResource("2_5grlf")
+region_enabled = true
+region_rect = Rect2(20, 0, 20, 20)
+
+[node name="Sprite2D6" type="Sprite2D" parent="SpriteStack"]
+visible = false
+z_index = 5
+y_sort_enabled = true
+position = Vector2(0, -12)
+scale = Vector2(12, 12)
+texture = ExtResource("2_5grlf")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 20)
+
+[node name="OreSpawn" type="Node2D" parent="."]
+position = Vector2(0, 37)

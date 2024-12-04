@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://pmmnxuo4t2jx"]
+
+[ext_resource type="Texture2D" uid="uid://cb7bw4gve7240" path="res://assets/sprites/icons/TubeIcon.png" id="1_yacfk"]
+[ext_resource type="PackedScene" uid="uid://cv3xx2ipw07nm" path="res://assets/nodes/grid_objects/Tube.tscn" id="2_og144"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="3_7o84y"]
+
+[resource]
+script = ExtResource("3_7o84y")
+item_name = "Tube"
+packed = ExtResource("2_og144")
+icon = ExtResource("1_yacfk")
+quantity = 1

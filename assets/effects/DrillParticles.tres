@@ -1,0 +1,11 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=2 format=3 uid="uid://c6r2b54nirjwi"]
+
+[ext_resource type="Texture2D" uid="uid://uug5g5cp365w" path="res://assets/effects/DrillParticleChunkRamp.tres" id="1_rqcw1"]
+
+[resource]
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 80.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 166, 0)
+color_ramp = ExtResource("1_rqcw1")

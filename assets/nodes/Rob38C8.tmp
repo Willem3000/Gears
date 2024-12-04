@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxpumxqrovykw"]
+
+[ext_resource type="Texture2D" uid="uid://belj5nx4bmar" path="res://assets/sprites/Robot.png" id="1_2ra2s"]
+[ext_resource type="Script" path="res://assets/scripts/Robot.gd" id="1_id8v3"]
+[ext_resource type="PackedScene" uid="uid://c2fw7818pcve8" path="res://assets/nodes/components/Inventory.tscn" id="3_3hcdw"]
+[ext_resource type="Script" path="res://assets/scripts/Inventory.gd" id="4_5xsr0"]
+
+[node name="Robot" type="Node2D"]
+script = ExtResource("1_id8v3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(12, 12)
+texture = ExtResource("1_2ra2s")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Inventory" parent="." instance=ExtResource("3_3hcdw")]
+script = ExtResource("4_5xsr0")
+
+[node name="InventoryBackdrop" type="ColorRect" parent="Inventory"]
+offset_left = -238.0
+offset_top = -337.0
+offset_right = 241.0
+offset_bottom = -123.0

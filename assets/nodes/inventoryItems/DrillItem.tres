@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://c7pq2on8s87ak"]
+
+[ext_resource type="Texture2D" uid="uid://dbua3mdfo6ycx" path="res://assets/sprites/icons/DrillIcon.png" id="1_inqhj"]
+[ext_resource type="PackedScene" uid="uid://dg7ey2o2w0ba6" path="res://assets/nodes/grid_objects/Drill.tscn" id="2_ftcvo"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="3_llqx5"]
+
+[resource]
+script = ExtResource("3_llqx5")
+item_name = "Drill"
+packed = ExtResource("2_ftcvo")
+icon = ExtResource("1_inqhj")
+quantity = 1

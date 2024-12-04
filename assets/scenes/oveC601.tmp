@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=3 uid="uid://40hdq423if6"]
+
+[ext_resource type="Script" path="res://assets/scripts/ObjectGrid.gd" id="1_58n3g"]
+[ext_resource type="PackedScene" uid="uid://sly0kb3hlygt" path="res://assets/nodes/Engine.tscn" id="2_j6p6w"]
+[ext_resource type="Script" path="res://assets/scenes/Hologram.gd" id="2_q0f7t"]
+[ext_resource type="PackedScene" uid="uid://qubh84rcb0t3" path="res://assets/nodes/SmallCog.tscn" id="3_l0r6w"]
+[ext_resource type="PackedScene" uid="uid://b6rwx7n10jf2b" path="res://assets/nodes/LargeCog.tscn" id="4_fx36r"]
+[ext_resource type="PackedScene" uid="uid://dxpumxqrovykw" path="res://assets/nodes/Robot.tscn" id="5_au07l"]
+[ext_resource type="PackedScene" uid="uid://dg7ey2o2w0ba6" path="res://assets/nodes/Drill.tscn" id="6_33gk8"]
+[ext_resource type="PackedScene" uid="uid://b86nkx0b13gjb" path="res://assets/nodes/Cursor.tscn" id="6_jjoc5"]
+[ext_resource type="PackedScene" uid="uid://c2fw7818pcve8" path="res://assets/nodes/UI/Inventory.tscn" id="6_qv5i3"]
+[ext_resource type="Script" path="res://assets/scripts/Camera.gd" id="7_jnr8u"]
+[ext_resource type="Script" path="res://assets/scripts/ObjectGridSelector.gd" id="8_qul4y"]
+[ext_resource type="PackedScene" uid="uid://chadfqhiu5hvh" path="res://assets/nodes/UI/HandCrafter.tscn" id="11_d52u0"]
+[ext_resource type="PackedScene" uid="uid://dy1bcg4lf225p" path="res://assets/nodes/UI/ExternalInventory.tscn" id="11_s574c"]
+[ext_resource type="PackedScene" uid="uid://3dgt6faxuo1j" path="res://assets/nodes/recipes/Recipes.tscn" id="13_1nbtn"]
+[ext_resource type="Script" path="res://assets/scenes/BehaviorGrid.gd" id="15_ub0xc"]
+
+[node name="Overworld" type="Node2D"]
+
+[node name="ObjectGrid" type="Node2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("1_58n3g")
+
+[node name="Hologram" type="Node2D" parent="ObjectGrid"]
+script = ExtResource("2_q0f7t")
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjectGrid/Hologram"]
+modulate = Color(1, 1, 1, 0.392157)
+scale = Vector2(12, 12)
+
+[node name="Engine" parent="ObjectGrid" instance=ExtResource("2_j6p6w")]
+
+[node name="SmallCog" parent="ObjectGrid" instance=ExtResource("3_l0r6w")]
+
+[node name="LargeCog" parent="ObjectGrid" instance=ExtResource("4_fx36r")]
+position = Vector2(0, 0)
+
+[node name="SmallCog2" parent="ObjectGrid" instance=ExtResource("3_l0r6w")]
+
+[node name="LargeCog2" parent="ObjectGrid" instance=ExtResource("4_fx36r")]
+position = Vector2(0, -1)
+
+[node name="Drill" parent="ObjectGrid" instance=ExtResource("6_33gk8")]
+
+[node name="BehaviorGrid" type="Node2D" parent="."]
+script = ExtResource("15_ub0xc")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow")]
+position = Vector2(0, -256)
+offset = Vector2(0, -150)
+zoom = Vector2(0.25, 0.25)
+position_smoothing_enabled = true
+position_smoothing_speed = 13.905
+script = ExtResource("7_jnr8u")
+follow = NodePath("../Robot")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ObjectGridSelector" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_qul4y")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ObjectGridSelector"]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 644.0
+color = Color(1, 1, 1, 0)
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("6_qv5i3")]
+offset_left = 198.0
+offset_top = 188.0
+offset_right = 198.0
+offset_bottom = 188.0
+
+[node name="ExternalInventory" parent="CanvasLayer" instance=ExtResource("11_s574c")]
+visible = false
+offset_left = 569.0
+offset_top = 185.0
+offset_right = 609.0
+offset_bottom = 225.0
+
+[node name="HandCrafter" parent="CanvasLayer" node_paths=PackedStringArray("recipes", "inventory", "external_inventory") instance=ExtResource("11_d52u0")]
+offset_left = 950.0
+offset_top = 193.0
+offset_right = 950.0
+offset_bottom = 193.0
+recipes = NodePath("../../Recipes")
+inventory = NodePath("../Inventory")
+external_inventory = NodePath("../ExternalInventory")
+
+[node name="Cursor" parent="CanvasLayer" node_paths=PackedStringArray("ObjectGridInstance") instance=ExtResource("6_jjoc5")]
+ObjectGridInstance = NodePath("../../ObjectGrid")
+
+[node name="Drops" type="Node2D" parent="."]
+
+[node name="Robot" parent="." instance=ExtResource("5_au07l")]
+
+[node name="Recipes" parent="." instance=ExtResource("13_1nbtn")]
+
+[connection signal="gui_input" from="CanvasLayer/ObjectGridSelector/ColorRect" to="CanvasLayer/ObjectGridSelector" method="_on_color_rect_gui_input"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=18 format=3 uid="uid://qoue7eaxn6jc"]
+
+[ext_resource type="Script" path="res://assets/scripts/TubeFan.gd" id="1_g2mk0"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="2_xse0y"]
+[ext_resource type="Texture2D" uid="uid://bgk4llv0a34gk" path="res://assets/sprites/TubeFan.png" id="3_xd4mi"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="4_p2gx5"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="5_bgf7r"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="6_sugo0"]
+[ext_resource type="PackedScene" uid="uid://d1tjgp7s4sfpa" path="res://assets/nodes/grid_objects/components/Suction.tscn" id="7_shgu5"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="8_yc60i"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="9_48fwe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipfcd"]
+shader = ExtResource("2_xse0y")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd85k"]
+atlas = ExtResource("3_xd4mi")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fadxk"]
+atlas = ExtResource("3_xd4mi")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_deak4"]
+atlas = ExtResource("3_xd4mi")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0lgh"]
+atlas = ExtResource("3_xd4mi")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fegmk"]
+atlas = ExtResource("3_xd4mi")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdoss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd85k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fadxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_deak4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0lgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fegmk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kijig"]
+size = Vector2(18, 14)
+
+[node name="TubeFan" type="Node2D"]
+script = ExtResource("1_g2mk0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_ipfcd")
+sprite_frames = SubResource("SpriteFrames_fdoss")
+frame_progress = 0.960561
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("8_yc60i")
+break_effect_pack = ExtResource("9_48fwe")
+
+[node name="Rotary" parent="." instance=ExtResource("4_p2gx5")]
+
+[node name="MachinePart" parent="." instance=ExtResource("5_bgf7r")]
+
+[node name="Placeable" parent="." instance=ExtResource("6_sugo0")]
+
+[node name="Suction" parent="." instance=ExtResource("7_shgu5")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_kijig")

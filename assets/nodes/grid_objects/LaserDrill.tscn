@@ -1,0 +1,94 @@
+[gd_scene load_steps=18 format=3 uid="uid://ddhda8ppktbwl"]
+
+[ext_resource type="Script" path="res://assets/scripts/LaserDrill.gd" id="1_lfmsn"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="2_15fer"]
+[ext_resource type="Texture2D" uid="uid://d18ckndu100rv" path="res://assets/sprites/LaserDrill.png" id="3_6bqwp"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="5_5arbw"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="6_3prpo"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="7_cc6y2"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="8_56bbm"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="9_01kq4"]
+[ext_resource type="PackedScene" uid="uid://cfjkvvt8u3iys" path="res://assets/nodes/miscellaneous/Laser.tscn" id="10_cwcb8"]
+[ext_resource type="AudioStream" uid="uid://bes5vru3gqkmu" path="res://assets/sound/sound_effects/OreDrilling.wav" id="13_dk5ay"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_84yvu"]
+shader = ExtResource("2_15fer")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oys4n"]
+atlas = ExtResource("3_6bqwp")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkq5q"]
+atlas = ExtResource("3_6bqwp")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkr0g"]
+atlas = ExtResource("3_6bqwp")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e3aw"]
+atlas = ExtResource("3_6bqwp")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5aes"]
+atlas = ExtResource("3_6bqwp")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oc1fe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oys4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkq5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkr0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e3aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5aes")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="LaserDrill" type="Node2D"]
+script = ExtResource("1_lfmsn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 10
+material = SubResource("ShaderMaterial_84yvu")
+sprite_frames = SubResource("SpriteFrames_oc1fe")
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("5_5arbw")
+break_effect_pack = ExtResource("6_3prpo")
+
+[node name="Rotary" parent="." instance=ExtResource("7_cc6y2")]
+
+[node name="MachinePart" parent="." instance=ExtResource("8_56bbm")]
+
+[node name="Placeable" parent="." instance=ExtResource("9_01kq4")]
+
+[node name="OreSpawn" type="Node2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="DrillingSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_dk5ay")
+volume_db = -80.0
+pitch_scale = 1.5
+autoplay = true
+
+[node name="Laser" parent="." node_paths=PackedStringArray("target_position") instance=ExtResource("10_cwcb8")]
+position = Vector2(7, 0)
+target_position = NodePath("../LaserTarget")
+
+[node name="LaserTarget" type="Node2D" parent="."]
+position = Vector2(16, 4)

@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://do4tgndlxxqtr"]
+
+[ext_resource type="Script" path="res://assets/scripts/ConfirmAction.gd" id="1_voytd"]
+
+[sub_resource type="SystemFont" id="SystemFont_rv2oo"]
+font_names = PackedStringArray("Connection II")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_levq1"]
+font_names = PackedStringArray("Peepo")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[node name="ConfirmAction" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_voytd")
+
+[node name="InputBlock" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -35.0
+offset_top = -29.0
+offset_right = 1186.0
+offset_bottom = 677.0
+color = Color(1, 1, 1, 0)
+
+[node name="BGBorder" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 197.0
+offset_top = 174.0
+offset_right = 949.0
+offset_bottom = 432.0
+color = Color(0.069283, 0.0960478, 0.125783, 1)
+
+[node name="BG" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 186.0
+offset_right = 938.0
+offset_bottom = 421.0
+color = Color(0.109804, 0.145098, 0.184314, 1)
+
+[node name="CancelButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 318.0
+offset_right = 531.0
+offset_bottom = 399.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Cancel"
+
+[node name="ConfirmButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 612.0
+offset_top = 318.0
+offset_right = 883.0
+offset_bottom = 399.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Confirm"
+
+[node name="ConfirmMessage" type="Label" parent="."]
+layout_mode = 0
+offset_left = 259.0
+offset_top = 198.0
+offset_right = 887.0
+offset_bottom = 298.0
+theme_override_fonts/font = SubResource("SystemFont_levq1")
+theme_override_font_sizes/font_size = 30
+text = "Save game as \"Savename\"?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]

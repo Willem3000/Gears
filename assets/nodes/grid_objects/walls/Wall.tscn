@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://bqbxps888i4b3"]
+
+[ext_resource type="Texture2D" uid="uid://kdaelm17kgcw" path="res://assets/sprites/WallPlaceholder.png" id="1_cybx0"]
+[ext_resource type="Script" path="res://assets/scripts/Wall.gd" id="1_ws15q"]
+[ext_resource type="Resource" uid="uid://b1uui3jwppvrx" path="res://assets/nodes/grid_objects/walls/StoneWall.tres" id="2_mjgc5"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="3_7ramv"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="5_ooe72"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="6_ppbj3"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="7_204fb"]
+[ext_resource type="Texture2D" uid="uid://i8nt7jj5xobh" path="res://assets/sprites/StoneChunk.png" id="8_flgkr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddpmj"]
+shader = ExtResource("3_7ramv")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5kngy"]
+size = Vector2(16, 16)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ox1uv"]
+polygon = PackedVector2Array(0, 0, 16, 0, 16, 16, 0, 16)
+
+[sub_resource type="Resource" id="Resource_r0iqc"]
+script = ExtResource("7_204fb")
+item_name = "Stone Chunk"
+icon = ExtResource("8_flgkr")
+quantity = 10
+
+[node name="Wall" type="Node2D"]
+script = ExtResource("1_ws15q")
+wall_resource = ExtResource("2_mjgc5")
+
+[node name="Side" type="Sprite2D" parent="."]
+light_mask = 2
+z_index = 10
+z_as_relative = false
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_ddpmj")
+texture = ExtResource("1_cybx0")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+visible = false
+z_index = 40
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_5kngy")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-8, -8)
+occluder = SubResource("OccluderPolygon2D_ox1uv")
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("6_ppbj3")
+break_effect_pack = ExtResource("5_ooe72")
+total_health = 10.0
+dropped_items = Array[ExtResource("7_204fb")]([SubResource("Resource_r0iqc")])
+health = 10.0

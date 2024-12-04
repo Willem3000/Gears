@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfjkvvt8u3iys"]
+
+[ext_resource type="Script" path="res://assets/scripts/RobotLaser.gd" id="1_585e1"]
+[ext_resource type="Texture2D" uid="uid://svxpacpwvuf4" path="res://assets/sprites/LightMask.png" id="2_4xmos"]
+
+[sub_resource type="Gradient" id="Gradient_gebds"]
+offsets = PackedFloat32Array(0, 0.053125, 0.189103, 0.501603, 0.663462, 0.741987, 0.817308, 0.897436, 1)
+colors = PackedColorArray(0.404511, 0.404511, 0.404511, 1, 1, 1, 1, 1, 1, 0.992437, 0.965787, 1, 1, 0.835294, 0.254902, 1, 0.705882, 0.12549, 0.164706, 1, 0.45098, 0.0901961, 0.176471, 1, 0.275294, 0.0901961, 0.151373, 1, 0.231373, 0.0901961, 0.145098, 1, 0.0784314, 0.0627451, 0.0745098, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4ca7d"]
+gradient = SubResource("Gradient_gebds")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t518v"]
+particle_flag_disable_z = true
+spread = 90.0
+initial_velocity_min = 80.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 98, 0)
+damping_min = 400.0
+damping_max = 400.0
+color_ramp = SubResource("GradientTexture1D_4ca7d")
+
+[node name="Laser" type="Node2D"]
+position = Vector2(0, -12)
+script = ExtResource("1_585e1")
+
+[node name="Line2D" type="Line2D" parent="."]
+light_mask = 0
+z_index = 20
+points = PackedVector2Array(0, 0, 50, 0)
+width = 1.0
+default_color = Color(0.878431, 1, 1, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 3
+color = Color(0.243137, 1, 1, 1)
+blend_mode = 1
+range_item_cull_mask = 3
+texture = ExtResource("2_4xmos")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_t518v")
+lifetime = 0.2
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 2
+collide_with_areas = true

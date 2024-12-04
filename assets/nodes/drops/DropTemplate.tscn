@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://blqqj4o2lveg5"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://dnjn7q62p14p4" path="res://assets/nodes/drops/DropPhysics.tres" id="1_qplrn"]
+[ext_resource type="Script" path="res://assets/scripts/Drop.gd" id="2_ihw16"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="4_vw22d"]
+[ext_resource type="Texture2D" uid="uid://cd6tv7k1w08lb" path="res://assets/sprites/Drops.png" id="5_e4r50"]
+[ext_resource type="AudioStream" uid="uid://ce1phrfw6s5j0" path="res://assets/sound/sound_effects/SuckIn.wav" id="6_vb1op"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1c30l"]
+shader = ExtResource("4_vw22d")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cp3g"]
+size = Vector2(4, 4)
+
+[node name="Drop" type="RigidBody2D"]
+collision_layer = 5
+collision_mask = 6
+physics_material_override = ExtResource("1_qplrn")
+gravity_scale = 0.0
+linear_damp = 5.0
+script = ExtResource("2_ihw16")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 6
+material = SubResource("ShaderMaterial_1c30l")
+texture = ExtResource("5_e4r50")
+region_enabled = true
+region_rect = Rect2(0, 0, 6, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0cp3g")
+
+[node name="SuctionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_vb1op")
+volume_db = -10.0

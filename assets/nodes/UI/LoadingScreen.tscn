@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://dookdqad01bjn"]
+
+[ext_resource type="Script" path="res://assets/scripts/LoadingScreen.gd" id="1_1ue7l"]
+
+[sub_resource type="Animation" id="Animation_xuttp"]
+resource_name = "ShowLoadingScreen"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.475),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.141176, 0.133333, 0.203922, 0), Color(0.141176, 0.133333, 0.203922, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m8y5y"]
+_data = {
+"ShowLoadingScreen": SubResource("Animation_xuttp")
+}
+
+[node name="LoadingScreen" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_1ue7l")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.141176, 0.133333, 0.203922, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m8y5y")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

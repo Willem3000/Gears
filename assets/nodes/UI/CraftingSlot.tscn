@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cavoqjnentc1t"]
+
+[ext_resource type="Script" path="res://assets/scripts/CraftingSlot.gd" id="1_krteq"]
+[ext_resource type="Texture2D" uid="uid://gdvkvhsgjxk7" path="res://assets/sprites/icons/SmallCogIcon.png" id="2_0myyu"]
+
+[node name="CraftingSlot" type="Panel"]
+custom_minimum_size = Vector2(50, 50)
+script = ExtResource("1_krteq")
+
+[node name="RecipeDescription" type="ItemList" parent="."]
+visible = false
+top_level = true
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+offset_right = 165.0
+offset_bottom = 35.0
+mouse_filter = 2
+allow_search = false
+auto_height = true
+icon_scale = 12.0
+fixed_icon_size = Vector2i(1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 25.0
+offset_bottom = 25.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_0myyu")
+expand_mode = 2
+stretch_mode = 4
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

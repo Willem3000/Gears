@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="WallResource" load_steps=6 format=3 uid="uid://b1uui3jwppvrx"]
+
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="1_m0lo2"]
+[ext_resource type="Texture2D" uid="uid://i8nt7jj5xobh" path="res://assets/sprites/StoneChunk.png" id="2_q1mek"]
+[ext_resource type="Script" path="res://assets/nodes/grid_objects/walls/WallResource.gd" id="3_uwu7j"]
+[ext_resource type="Texture2D" uid="uid://kdaelm17kgcw" path="res://assets/sprites/WallPlaceholder.png" id="4_4bynn"]
+
+[sub_resource type="Resource" id="Resource_r0iqc"]
+script = ExtResource("1_m0lo2")
+item_name = "Stone Chunk"
+icon = ExtResource("2_q1mek")
+quantity = 10
+
+[resource]
+script = ExtResource("3_uwu7j")
+sprite = ExtResource("4_4bynn")
+dropped_items = Array[ExtResource("1_m0lo2")]([SubResource("Resource_r0iqc")])
+indestructable = false
+total_health = 10.0

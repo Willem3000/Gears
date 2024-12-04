@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b05ubxh353mus"]
+
+[ext_resource type="Texture2D" uid="uid://but4bbky7usf0" path="res://assets/sprites/Shaft.png" id="1_8e617"]
+
+[node name="Shaft" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(11, 11)
+texture = ExtResource("1_8e617")

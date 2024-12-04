@@ -1,0 +1,51 @@
+[gd_scene load_steps=11 format=3 uid="uid://qubh84rcb0t3"]
+
+[ext_resource type="Script" path="res://assets/scripts/SmallCog.gd" id="1_g44oo"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="2_8jtlq"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="2_x8cx2"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="3_2u6vl"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="3_wger5"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="4_ok8ch"]
+[ext_resource type="Script" path="res://assets/scripts/SpriteStack.gd" id="5_1tf4g"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="6_n6i64"]
+[ext_resource type="Texture2D" uid="uid://bafhumcp234fw" path="res://assets/sprites/CogSmall.png" id="7_yduya"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hw53"]
+resource_local_to_scene = true
+shader = ExtResource("6_n6i64")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[node name="SmallCog" type="Node2D"]
+script = ExtResource("1_g44oo")
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("2_x8cx2")
+break_effect_pack = ExtResource("3_wger5")
+
+[node name="Placeable" parent="." instance=ExtResource("2_8jtlq")]
+
+[node name="Rotary" parent="." instance=ExtResource("3_2u6vl")]
+
+[node name="MachinePart" parent="." instance=ExtResource("4_ok8ch")]
+
+[node name="SpriteStack" type="Node2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("5_1tf4g")
+height_gap = -1.0
+
+[node name="Sprite2D0" type="Sprite2D" parent="SpriteStack"]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_8hw53")
+texture = ExtResource("7_yduya")
+region_enabled = true
+region_rect = Rect2(20, 0, 20, 20)
+
+[node name="Sprite2D1" type="Sprite2D" parent="SpriteStack"]
+z_index = 1
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_8hw53")
+position = Vector2(0, -1)
+texture = ExtResource("7_yduya")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 20)

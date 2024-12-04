@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv3xx2ipw07nm"]
+
+[ext_resource type="Script" path="res://assets/scripts/Tube.gd" id="1_vmh5f"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/components/Grabbable.tscn" id="1_von4r"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/components/MachinePart.tscn" id="2_tnuo0"]
+[ext_resource type="Texture2D" uid="uid://b7gvwpxu3u2md" path="res://assets/sprites/Tubes.png" id="3_ih7fl"]
+[ext_resource type="PackedScene" uid="uid://d1tjgp7s4sfpa" path="res://assets/nodes/components/Suction.tscn" id="5_tfwex"]
+[ext_resource type="Script" path="res://assets/scripts/CollisionRect2D.gd" id="6_2y17i"]
+
+[node name="Tube" type="Node2D"]
+script = ExtResource("1_vmh5f")
+
+[node name="Grabbable" parent="." instance=ExtResource("1_von4r")]
+
+[node name="MachinePart" parent="." instance=ExtResource("2_tnuo0")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+scale = Vector2(12, 12)
+texture = ExtResource("3_ih7fl")
+region_enabled = true
+region_rect = Rect2(40, 60, 20, 20)
+
+[node name="Suction" parent="." instance=ExtResource("5_tfwex")]
+
+[node name="Colliders" type="Node2D" parent="."]
+visible = false
+
+[node name="CollisionRect2D" type="Node2D" parent="Colliders"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = -120
+y = -96
+w = 240
+h = 36
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)
+
+[node name="CollisionRect2D2" type="Node2D" parent="Colliders"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = -120
+y = 60
+w = 240
+h = 36
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)
+
+[node name="ColliderTemplates" type="Node2D" parent="."]
+
+[node name="Straight" type="Node2D" parent="ColliderTemplates"]
+visible = false
+
+[node name="CollisionRect2D" type="Node2D" parent="ColliderTemplates/Straight"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = -120
+y = -96
+w = 240
+h = 36
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)
+
+[node name="CollisionRect2D2" type="Node2D" parent="ColliderTemplates/Straight"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = -120
+y = 60
+w = 240
+h = 36
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)
+
+[node name="Corner" type="Node2D" parent="ColliderTemplates"]
+
+[node name="CollisionRect2D" type="Node2D" parent="ColliderTemplates/Corner"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = -96
+y = -96
+w = 216
+h = 36
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)
+
+[node name="CollisionRect2D3" type="Node2D" parent="ColliderTemplates/Corner"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = -96
+y = -96
+w = 36
+h = 216
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)
+
+[node name="CollisionRect2D2" type="Node2D" parent="ColliderTemplates/Corner"]
+z_index = 100
+script = ExtResource("6_2y17i")
+x = 60
+y = 60
+w = 60
+h = 60
+draw_col = Color(0, 0.619608, 0.313726, 0.490196)

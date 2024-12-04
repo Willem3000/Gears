@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WallResource" load_steps=3 format=3 uid="uid://bg3kdrftlqfvm"]
+
+[ext_resource type="Script" path="res://assets/nodes/grid_objects/walls/WallResource.gd" id="2_0yu6h"]
+[ext_resource type="Texture2D" uid="uid://cb24tk1ukc4ng" path="res://assets/sprites/IndestructableWallPlaceholder.png" id="2_h763u"]
+
+[resource]
+script = ExtResource("2_0yu6h")
+sprite = ExtResource("2_h763u")
+indestructable = true
+total_health = 1.0

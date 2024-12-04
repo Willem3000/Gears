@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1tjgp7s4sfpa"]
+
+[ext_resource type="Script" path="res://assets/scripts/Suction.gd" id="1_r7ch4"]
+
+[node name="Suction" type="Node2D"]
+script = ExtResource("1_r7ch4")

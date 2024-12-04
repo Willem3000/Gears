@@ -1,0 +1,87 @@
+[gd_scene load_steps=17 format=3 uid="uid://c5bcgtvplwas8"]
+
+[ext_resource type="Script" path="res://assets/scripts/Fan.gd" id="1_h78sf"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="2_ws746"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="2_xm6nk"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="3_axa2s"]
+[ext_resource type="Texture2D" uid="uid://drdfa3u8i3k7k" path="res://assets/sprites/Fan.png" id="3_yhkib"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="4_orup4"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="5_xjdhs"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="6_pnjub"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26jmn"]
+shader = ExtResource("2_ws746")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqv6l"]
+atlas = ExtResource("3_yhkib")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s68sy"]
+atlas = ExtResource("3_yhkib")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir4b0"]
+atlas = ExtResource("3_yhkib")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nbql"]
+atlas = ExtResource("3_yhkib")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaaq8"]
+atlas = ExtResource("3_yhkib")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qt6tx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqv6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s68sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir4b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nbql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaaq8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3npwd"]
+size = Vector2(6, 18)
+
+[node name="Fan" type="Node2D"]
+script = ExtResource("1_h78sf")
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("2_xm6nk")
+break_effect_pack = ExtResource("3_axa2s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+material = SubResource("ShaderMaterial_26jmn")
+sprite_frames = SubResource("SpriteFrames_qt6tx")
+
+[node name="Rotary" parent="." instance=ExtResource("4_orup4")]
+
+[node name="MachinePart" parent="." instance=ExtResource("5_xjdhs")]
+
+[node name="Placeable" parent="." instance=ExtResource("6_pnjub")]
+
+[node name="StaticBody2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_3npwd")
+debug_color = Color(0.61267, 0.434113, 0.823555, 0.42)

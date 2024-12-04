@@ -1,0 +1,126 @@
+[gd_scene load_steps=22 format=3 uid="uid://sly0kb3hlygt"]
+
+[ext_resource type="Script" path="res://assets/scripts/Engine.gd" id="1_dmovh"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/grid_objects/components/Placeable.tscn" id="2_43775"]
+[ext_resource type="Script" path="res://assets/scripts/Breakable.gd" id="2_u7hil"]
+[ext_resource type="PackedScene" uid="uid://j78jrdji3ixh" path="res://assets/effects/BreakEffect.tscn" id="3_qak3p"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/grid_objects/components/Rotary.tscn" id="3_qxt0f"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="4_ikh28"]
+[ext_resource type="Shader" path="res://assets/shaders/LinearGradientLighting.gdshader" id="5_y38ah"]
+[ext_resource type="Texture2D" uid="uid://ccldvfwccva71" path="res://assets/sprites/Engine.png" id="6_lxhh2"]
+[ext_resource type="Texture2D" uid="uid://077niqbntlsb" path="res://assets/sprites/EngineHeat.png" id="7_kmxl2"]
+[ext_resource type="PackedScene" uid="uid://b2fmo0i1scr7r" path="res://assets/nodes/miscellaneous/FullPointLight2D.tscn" id="8_pvvir"]
+
+[sub_resource type="Gradient" id="Gradient_7kn57"]
+offsets = PackedFloat32Array(0, 0.0533333, 0.482667, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.875029, 0.292352, 0.275731, 1, 0.882913, 0.504633, 0.252988, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1pcj7"]
+gradient = SubResource("Gradient_7kn57")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44njt"]
+resource_local_to_scene = true
+shader = ExtResource("5_y38ah")
+shader_parameter/unshaded_color = Vector4(0.09, 0.09, 0.09, 1)
+shader_parameter/highlight_color = Vector3(0, 0, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uo7n"]
+atlas = ExtResource("6_lxhh2")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwfu8"]
+atlas = ExtResource("6_lxhh2")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n64ac"]
+atlas = ExtResource("6_lxhh2")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp860"]
+atlas = ExtResource("6_lxhh2")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1upup"]
+atlas = ExtResource("6_lxhh2")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_82i8h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uo7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwfu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n64ac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wp860")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1upup")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8gdd"]
+size = Vector2(16, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv02i"]
+size = Vector2(2, 2)
+
+[node name="Engine" type="Node2D"]
+script = ExtResource("1_dmovh")
+heat_ramp = SubResource("GradientTexture1D_1pcj7")
+
+[node name="Breakable" type="Node2D" parent="."]
+script = ExtResource("2_u7hil")
+break_effect_pack = ExtResource("3_qak3p")
+
+[node name="Placeable" parent="." instance=ExtResource("2_43775")]
+
+[node name="Rotary" parent="." instance=ExtResource("3_qxt0f")]
+
+[node name="MachinePart" parent="." instance=ExtResource("4_ikh28")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 10
+z_as_relative = false
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_44njt")
+sprite_frames = SubResource("SpriteFrames_82i8h")
+frame = 2
+frame_progress = 0.822765
+
+[node name="EngineHeat" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 10
+texture = ExtResource("7_kmxl2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 40
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_c8gdd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7, -7)
+shape = SubResource("RectangleShape2D_iv02i")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(7, 7)
+shape = SubResource("RectangleShape2D_iv02i")
+
+[node name="FullPointLight2D" parent="." instance=ExtResource("8_pvvir")]
+position = Vector2(0, -3)
+radius = 0.376471
+intensity = 4.78
+
+[connection signal="changed_rotation" from="Rotary" to="." method="_on_rotary_changed_rotation"]

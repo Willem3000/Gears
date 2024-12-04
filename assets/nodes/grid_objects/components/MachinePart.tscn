@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbxj2jfpnkfn7"]
+
+[ext_resource type="Script" path="res://assets/scripts/MachinePart.gd" id="1_kmfu1"]
+
+[node name="MachinePart" type="Node2D"]
+script = ExtResource("1_kmfu1")

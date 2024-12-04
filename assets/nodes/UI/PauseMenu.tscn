@@ -1,0 +1,266 @@
+[gd_scene load_steps=12 format=3 uid="uid://benlpoxxu2tgk"]
+
+[ext_resource type="Script" path="res://assets/scripts/PauseMenu.gd" id="1_gu8j6"]
+[ext_resource type="Script" path="res://assets/scripts/SavePage.gd" id="2_o7486"]
+[ext_resource type="Script" path="res://assets/scripts/MainPage.gd" id="2_rbv85"]
+[ext_resource type="Script" path="res://assets/scripts/LoadPage.gd" id="3_joqu1"]
+[ext_resource type="Script" path="res://assets/scripts/SaveFileList.gd" id="3_ug6rx"]
+[ext_resource type="PackedScene" uid="uid://8ctllaidqx1e" path="res://assets/nodes/UI/FullscreenButton.tscn" id="6_0vblw"]
+[ext_resource type="PackedScene" uid="uid://do4tgndlxxqtr" path="res://assets/nodes/UI/confirm_action.tscn" id="6_vu0st"]
+
+[sub_resource type="SystemFont" id="SystemFont_rv2oo"]
+font_names = PackedStringArray("Connection II")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_tmoer"]
+font_names = PackedStringArray("Peepo")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_levq1"]
+font_names = PackedStringArray("Peepo")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_njn82"]
+font_names = PackedStringArray("Peepo")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[node name="Pause Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gu8j6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -113.0
+offset_top = -54.0
+offset_right = 1114.0
+offset_bottom = 635.0
+color = Color(0.0666667, 0.180392, 0.317647, 0.741176)
+
+[node name="MainPage" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_rbv85")
+
+[node name="ContinueButton" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 52.0
+offset_right = 603.0
+offset_bottom = 133.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Continue"
+
+[node name="SaveButton" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 166.0
+offset_right = 603.0
+offset_bottom = 247.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Save
+"
+
+[node name="LoadButton" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 279.0
+offset_right = 603.0
+offset_bottom = 360.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Load"
+
+[node name="QuitButton" type="Button" parent="MainPage"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 393.0
+offset_right = 603.0
+offset_bottom = 474.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Quit Game"
+
+[node name="SavePage" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_o7486")
+
+[node name="SaveButton" type="Button" parent="SavePage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 321.0
+offset_right = 292.0
+offset_bottom = 402.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Save Game
+"
+
+[node name="QuickSaveButton" type="Button" parent="SavePage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 142.0
+offset_right = 292.0
+offset_bottom = 223.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Quick save"
+
+[node name="DeleteSaveButton" type="Button" parent="SavePage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 231.0
+offset_right = 292.0
+offset_bottom = 312.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Delete save"
+
+[node name="BackButton" type="Button" parent="SavePage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 51.0
+offset_right = 292.0
+offset_bottom = 132.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="SaveFiles" type="ItemList" parent="SavePage"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 51.0
+offset_right = 940.0
+offset_bottom = 488.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_tmoer")
+theme_override_font_sizes/font_size = 30
+item_count = 2
+item_0/text = "Save file A"
+item_1/text = "Save File B"
+script = ExtResource("3_ug6rx")
+
+[node name="SaveStatus" type="Label" parent="SavePage"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 463.0
+offset_right = 243.0
+offset_bottom = 492.0
+theme_override_fonts/font = SubResource("SystemFont_levq1")
+theme_override_font_sizes/font_size = 20
+text = "Game saved succesfully"
+
+[node name="SaveName" type="TextEdit" parent="SavePage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 411.0
+offset_right = 292.0
+offset_bottom = 460.0
+theme_override_fonts/font = SubResource("SystemFont_njn82")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Save title..."
+
+[node name="ConfirmAction" parent="SavePage" instance=ExtResource("6_vu0st")]
+offset_left = -88.0
+offset_top = -64.0
+offset_right = -48.0
+offset_bottom = -24.0
+
+[node name="LoadPage" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_joqu1")
+
+[node name="LoadButton" type="Button" parent="LoadPage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 169.0
+offset_right = 292.0
+offset_bottom = 250.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Load Game
+"
+
+[node name="BackButton" type="Button" parent="LoadPage"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 56.0
+offset_right = 292.0
+offset_bottom = 137.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_rv2oo")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="SaveFiles" type="ItemList" parent="LoadPage"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 56.0
+offset_right = 940.0
+offset_bottom = 493.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_tmoer")
+theme_override_font_sizes/font_size = 30
+item_count = 2
+item_0/text = "Save file A"
+item_1/text = "Save File B"
+script = ExtResource("3_ug6rx")
+
+[node name="ConfirmAction" parent="LoadPage" instance=ExtResource("6_vu0st")]
+offset_left = -88.0
+offset_top = -59.0
+offset_right = -48.0
+offset_bottom = -19.0
+
+[node name="FullscreenButton" parent="." instance=ExtResource("6_0vblw")]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 481.0
+offset_right = 64.0
+offset_bottom = 511.0
+
+[connection signal="pressed" from="MainPage/ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="MainPage/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="MainPage/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="MainPage/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SavePage/SaveButton" to="SavePage" method="_on_save_button_pressed"]
+[connection signal="pressed" from="SavePage/QuickSaveButton" to="SavePage" method="_on_quick_save_button_pressed"]
+[connection signal="pressed" from="SavePage/DeleteSaveButton" to="SavePage" method="_on_delete_save_button_pressed"]
+[connection signal="pressed" from="SavePage/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="SavePage/SaveFiles" to="SavePage" method="_on_save_files_item_selected"]
+[connection signal="focus_entered" from="SavePage/SaveName" to="SavePage" method="_on_save_name_focus_entered"]
+[connection signal="focus_exited" from="SavePage/SaveName" to="SavePage" method="_on_save_name_focus_exited"]
+[connection signal="text_changed" from="SavePage/SaveName" to="SavePage" method="_on_save_name_text_changed"]
+[connection signal="confirm" from="SavePage/ConfirmAction" to="SavePage" method="_on_confirm_action_confirm"]
+[connection signal="pressed" from="LoadPage/LoadButton" to="LoadPage" method="_on_load_button_pressed"]
+[connection signal="pressed" from="LoadPage/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="LoadPage/SaveFiles" to="LoadPage" method="_on_save_files_item_selected"]
+[connection signal="confirm" from="LoadPage/ConfirmAction" to="LoadPage" method="_on_confirm_action_confirm"]

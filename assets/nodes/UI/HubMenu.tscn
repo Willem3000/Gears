@@ -1,0 +1,304 @@
+[gd_scene load_steps=23 format=3 uid="uid://f4nmbtvp5d0t"]
+
+[ext_resource type="Script" path="res://assets/nodes/UI/HubMenu.gd" id="1_bjsy5"]
+[ext_resource type="Texture2D" uid="uid://bcqacuxdersjw" path="res://assets/sprites/MenuBG.png" id="2_iifol"]
+[ext_resource type="Script" path="res://assets/nodes/UI/LineScrollEffect.gd" id="3_37spr"]
+[ext_resource type="PackedScene" uid="uid://ppoov7beikkd" path="res://assets/nodes/UI/InventorySlot.tscn" id="4_60yi6"]
+[ext_resource type="Resource" uid="uid://dchuk66g4qlmy" path="res://assets/nodes/inventoryItems/EngineItem.tres" id="5_sk7gy"]
+[ext_resource type="Texture2D" uid="uid://b7qfx7npf23oi" path="res://assets/sprites/N0V_EMBER.png" id="6_gqtlw"]
+[ext_resource type="Texture2D" uid="uid://buphvh8ed0mr6" path="res://assets/sprites/CoalChunk.png" id="6_ptiif"]
+[ext_resource type="Animation" uid="uid://vg1aou7xluw1" path="res://assets/animations/OpenInventory.res" id="7_7lj66"]
+[ext_resource type="Script" path="res://assets/scripts/InventoryItem.gd" id="7_c11xh"]
+[ext_resource type="Resource" uid="uid://c7pq2on8s87ak" path="res://assets/nodes/inventoryItems/DrillItem.tres" id="7_jx643"]
+[ext_resource type="Resource" uid="uid://bnp2ucidi1ypj" path="res://assets/nodes/inventoryItems/WallDrillItem.tres" id="9_edo2g"]
+[ext_resource type="AudioStream" uid="uid://d2ho4txe5chjt" path="res://assets/sound/sound_effects/HologramOpen.wav" id="11_578aw"]
+[ext_resource type="Texture2D" uid="uid://bqs70rl11c5n" path="res://assets/sprites/Ember.png" id="11_wwnnf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iw0wq"]
+texture = ExtResource("2_iifol")
+expand_margin_top = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="Resource" id="Resource_im6bm"]
+script = ExtResource("7_c11xh")
+item_name = "Coal Chunk"
+icon = ExtResource("6_ptiif")
+quantity = 10
+
+[sub_resource type="Animation" id="Animation_lq55u"]
+resource_name = "OpenHubMenu"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(2.14354, -2, -2, 1),
+"update": 0,
+"values": [Vector2(0.25, 0), Vector2(0.25, 0.313), Vector2(0.25, 0.225), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t8f0o"]
+_data = {
+"OpenHubMenu": SubResource("Animation_lq55u"),
+"OpenInventory": ExtResource("7_7lj66")
+}
+
+[sub_resource type="SystemFont" id="SystemFont_c2r3v"]
+font_names = PackedStringArray("Dogica")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_g5w0s"]
+font = SubResource("SystemFont_c2r3v")
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3jr8r"]
+bg_color = Color(0.403375, 0.3975, 0.75, 0.52549)
+
+[sub_resource type="SystemFont" id="SystemFont_8s65r"]
+font_names = PackedStringArray("Peepo")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_somrk"]
+font_names = PackedStringArray("Connection II")
+hinting = 0
+subpixel_positioning = 0
+
+[node name="HubMenu" type="Control"]
+z_index = 40
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(1, 0.977778)
+script = ExtResource("1_bjsy5")
+
+[node name="LinesMask" type="Panel" parent="."]
+show_behind_parent = true
+light_mask = 0
+clip_contents = true
+layout_mode = 0
+offset_left = -367.0
+offset_top = -123.0
+offset_right = 368.0
+offset_bottom = 124.0
+
+[node name="Lines" type="Panel" parent="LinesMask"]
+modulate = Color(1, 1, 1, 0.745098)
+light_mask = 0
+layout_mode = 0
+offset_right = 735.0
+offset_bottom = 247.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_iw0wq")
+script = ExtResource("3_37spr")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = -106.0
+offset_top = -69.0
+offset_right = 106.0
+offset_bottom = 106.0
+columns = 4
+
+[node name="InventorySlot" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+held_item = ExtResource("5_sk7gy")
+
+[node name="InventorySlot2" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+held_item = SubResource("Resource_im6bm")
+
+[node name="InventorySlot3" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+held_item = ExtResource("7_jx643")
+
+[node name="InventorySlot4" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+held_item = ExtResource("9_edo2g")
+
+[node name="InventorySlot5" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot6" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot7" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot8" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot9" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot10" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot11" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="InventorySlot12" parent="GridContainer" instance=ExtResource("4_60yi6")]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t8f0o")
+}
+speed_scale = 2.0
+
+[node name="SEP7_EMBER" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = -123.5
+offset_top = -107.0
+offset_right = 134.5
+offset_bottom = -84.0
+text = "EMBER CORP."
+label_settings = SubResource("LabelSettings_g5w0s")
+horizontal_alignment = 1
+
+[node name="OBJECTIVES" type="Label" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 132.0
+offset_top = -107.0
+offset_right = 368.0
+offset_bottom = -84.0
+text = "OBJECTIVE"
+label_settings = SubResource("LabelSettings_g5w0s")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 130.0
+offset_top = -113.0
+offset_right = 132.0
+offset_bottom = 115.0
+color = Color(0.239216, 0.266667, 0.364706, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = -130.0
+offset_top = -113.0
+offset_right = -128.0
+offset_bottom = 115.0
+color = Color(0.239216, 0.266667, 0.364706, 1)
+
+[node name="PortraitMask" type="ColorRect" parent="."]
+light_mask = 0
+clip_contents = true
+layout_mode = 0
+offset_left = -358.0
+offset_top = -113.0
+offset_right = -138.0
+offset_bottom = 72.0
+color = Color(1, 1, 1, 0)
+
+[node name="Portrait" type="TextureRect" parent="PortraitMask"]
+modulate = Color(1, 1, 1, 0.533333)
+light_mask = 0
+layout_mode = 0
+offset_left = 12.5
+offset_top = -50.25
+offset_right = 105.5
+offset_bottom = 83.75
+scale = Vector2(2, 2)
+texture = ExtResource("6_gqtlw")
+
+[node name="NOVAInteractor" type="Button" parent="PortraitMask"]
+modulate = Color(1, 1, 1, 0)
+light_mask = 0
+layout_mode = 0
+offset_right = 220.0
+offset_bottom = 229.0
+
+[node name="NovaDialoguePanel" type="Panel" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = -351.0
+offset_top = 72.0
+offset_right = -144.0
+offset_bottom = 115.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jr8r")
+
+[node name="NovaText" type="RichTextLabel" parent="NovaDialoguePanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_constants/line_separation = -2
+theme_override_fonts/normal_font = SubResource("SystemFont_8s65r")
+theme_override_font_sizes/normal_font_size = 9
+text = "Hi SEP7, I am N0V.EMBER, your Navigation Virtualizer to guide you during your mission. It is nice to meet you.
+"
+scroll_active = false
+
+[node name="ObjectiveDialoguePanel" type="Panel" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 146.0
+offset_top = -84.5
+offset_right = 355.0
+offset_bottom = 52.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jr8r")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ObjectiveDialoguePanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 205.0
+offset_bottom = 132.0
+theme_override_fonts/normal_font = SubResource("SystemFont_8s65r")
+theme_override_font_sizes/normal_font_size = 9
+text = "Welcome to the prototype demo of SEP7.EMBER! Collect building materials, build machines and gather 1000 embers for the glory of Ember Corp.! To get you started, Ember Corp. has supplied you with an engine, 20 chunks of coal and a mining drill.
+
+Everything you see in this game is placeholder and will be changed on release. Don't forget to leave feedback and enjoy the game!!"
+scroll_active = false
+
+[node name="EmberCountPanel" type="Panel" parent="."]
+light_mask = 0
+layout_mode = 0
+offset_left = 191.0
+offset_top = 66.0
+offset_right = 311.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3jr8r")
+
+[node name="TextureRect" type="TextureRect" parent="EmberCountPanel"]
+modulate = Color(1, 1, 1, 0.533333)
+light_mask = 0
+layout_mode = 0
+offset_left = 1.5
+offset_top = 6.5
+offset_right = 21.5
+offset_bottom = 26.5
+texture = ExtResource("11_wwnnf")
+stretch_mode = 5
+
+[node name="EmberCounter" type="Label" parent="EmberCountPanel"]
+light_mask = 0
+layout_mode = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 116.0
+offset_bottom = 28.0
+theme_override_fonts/font = SubResource("SystemFont_somrk")
+theme_override_font_sizes/font_size = 20
+text = "1000/1000"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_578aw")
+
+[connection signal="pressed" from="PortraitMask/NOVAInteractor" to="." method="_on_nova_interactor_pressed"]

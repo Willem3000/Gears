@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6rwx7n10jf2b"]
+
+[ext_resource type="Script" path="res://assets/scripts/LargeCog.gd" id="1_rl50c"]
+[ext_resource type="Texture2D" uid="uid://dkpxoherjdxiq" path="res://assets/sprites/CogLargeBackdrop.png" id="2_orfnl"]
+[ext_resource type="Texture2D" uid="uid://bgu61myiy68ob" path="res://assets/sprites/CogLarge.png" id="2_u4mub"]
+[ext_resource type="PackedScene" uid="uid://wu7o1nb6dsiv" path="res://assets/nodes/components/Grabbable.tscn" id="3_f3fja"]
+[ext_resource type="PackedScene" uid="uid://e2pdlxv670ee" path="res://assets/nodes/components/Rotary.tscn" id="4_7won2"]
+[ext_resource type="Script" path="res://assets/nodes/SpriteStack.gd" id="5_arn3a"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/components/MachinePart.tscn" id="5_vc33g"]
+
+[node name="LargeCog" type="Node2D"]
+position = Vector2(728, 240)
+script = ExtResource("1_rl50c")
+
+[node name="Grabbable" parent="." instance=ExtResource("3_f3fja")]
+
+[node name="Rotary" parent="." instance=ExtResource("4_7won2")]
+rotation_speed = 0
+
+[node name="MachinePart" parent="." instance=ExtResource("5_vc33g")]
+
+[node name="SpriteStack" type="Node2D" parent="."]
+script = ExtResource("5_arn3a")
+
+[node name="Sprite2DBackdrop" type="Sprite2D" parent="SpriteStack"]
+y_sort_enabled = true
+position = Vector2(0, 12)
+scale = Vector2(12, 12)
+texture = ExtResource("2_orfnl")
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteStack"]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(12, 12)
+texture = ExtResource("2_u4mub")

@@ -1,0 +1,177 @@
+[gd_scene load_steps=12 format=3 uid="uid://4fescsv8q2iu"]
+
+[ext_resource type="Script" path="res://assets/scripts/MainMenuManager.gd" id="1_nx2cr"]
+[ext_resource type="Texture2D" uid="uid://yrhfs1svt2g3" path="res://assets/sprites/MainMenuBG.png" id="2_yo12e"]
+[ext_resource type="Script" path="res://assets/scripts/MainPage.gd" id="3_0p1bm"]
+[ext_resource type="Script" path="res://assets/scripts/LoadPage.gd" id="3_b6w10"]
+[ext_resource type="Script" path="res://assets/scripts/SaveFileList.gd" id="4_kip45"]
+[ext_resource type="PackedScene" uid="uid://dookdqad01bjn" path="res://assets/nodes/UI/LoadingScreen.tscn" id="6_5wsp5"]
+[ext_resource type="PackedScene" uid="uid://8ctllaidqx1e" path="res://assets/nodes/UI/FullscreenButton.tscn" id="7_3p8qi"]
+[ext_resource type="PackedScene" uid="uid://do4tgndlxxqtr" path="res://assets/nodes/UI/confirm_action.tscn" id="7_jlppf"]
+
+[sub_resource type="SystemFont" id="SystemFont_e17pq"]
+font_names = PackedStringArray("Connection II")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_foqh7"]
+font_names = PackedStringArray("Connection II")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_174jx"]
+font_names = PackedStringArray("Peepo")
+hinting = 0
+subpixel_positioning = 0
+oversampling = 10.0
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_nx2cr")
+
+[node name="LoadingScreen" parent="." instance=ExtResource("6_5wsp5")]
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+offset_right = 384.0
+offset_bottom = 216.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_yo12e")
+
+[node name="Changelog" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Changelog"]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 17.0
+offset_right = 1123.0
+offset_bottom = 227.0
+text = "Changelog
+v0.1.2
+- Added changelog
+- Added save/load confirm popup
+- Engine drops inserted coal on pickup
+- Rotate items in hand
+- Delete save button
+- Fixed wall explosion screenshake distance
+- Stack craft 5 items with right click
+- Wind direction variety on drilled drops
+
+v0.1.1
+- Loading screen
+- Fix machines not working
+- Shift-click objects
+
+v.0.1.0
+- Demo"
+
+[node name="MainPage" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_0p1bm")
+
+[node name="NewGameButton" type="Button" parent="CanvasLayer/MainPage"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 231.0
+offset_right = 340.0
+offset_bottom = 312.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_e17pq")
+theme_override_font_sizes/font_size = 40
+text = "New Game
+"
+
+[node name="LoadGameButton" type="Button" parent="CanvasLayer/MainPage"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 339.0
+offset_right = 340.0
+offset_bottom = 420.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_e17pq")
+theme_override_font_sizes/font_size = 40
+text = "Load
+"
+
+[node name="QuitGameButton" type="Button" parent="CanvasLayer/MainPage"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 446.0
+offset_right = 340.0
+offset_bottom = 527.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_e17pq")
+theme_override_font_sizes/font_size = 40
+text = "Quit Game"
+
+[node name="LoadPage" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_b6w10")
+main_menu_load = true
+
+[node name="LoadButton" type="Button" parent="CanvasLayer/LoadPage"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 339.0
+offset_right = 340.0
+offset_bottom = 420.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_foqh7")
+theme_override_font_sizes/font_size = 40
+text = "Load Game
+"
+
+[node name="BackButton" type="Button" parent="CanvasLayer/LoadPage"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 231.0
+offset_right = 340.0
+offset_bottom = 312.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_foqh7")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="SaveFiles" type="ItemList" parent="CanvasLayer/LoadPage"]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 235.0
+offset_right = 1041.0
+offset_bottom = 582.0
+focus_mode = 0
+theme_override_fonts/font = SubResource("SystemFont_174jx")
+theme_override_font_sizes/font_size = 30
+item_count = 2
+item_0/text = "Save file A"
+item_1/text = "Save File B"
+script = ExtResource("4_kip45")
+
+[node name="ConfirmAction" parent="CanvasLayer/LoadPage" instance=ExtResource("7_jlppf")]
+
+[node name="FullscreenButton" parent="CanvasLayer" instance=ExtResource("7_3p8qi")]
+offset_left = 24.0
+offset_top = 591.0
+offset_right = 54.0
+offset_bottom = 621.0
+
+[connection signal="pressed" from="CanvasLayer/MainPage/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainPage/LoadGameButton" to="." method="_on_load_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainPage/QuitGameButton" to="." method="_on_quit_game_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoadPage/LoadButton" to="CanvasLayer/LoadPage" method="_on_load_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoadPage/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="item_selected" from="CanvasLayer/LoadPage/SaveFiles" to="CanvasLayer/LoadPage" method="_on_save_files_item_selected"]
+[connection signal="confirm" from="CanvasLayer/LoadPage/ConfirmAction" to="CanvasLayer/LoadPage" method="_on_confirm_action_confirm"]

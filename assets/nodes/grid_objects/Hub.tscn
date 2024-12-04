@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://btdxklcv3tvxh"]
+
+[ext_resource type="Script" path="res://assets/scripts/Hub.gd" id="1_05n0u"]
+[ext_resource type="PackedScene" uid="uid://f4nmbtvp5d0t" path="res://assets/nodes/UI/HubMenu.tscn" id="2_2la7v"]
+[ext_resource type="Texture2D" uid="uid://bx8iylid537m1" path="res://assets/sprites/HubShip.png" id="3_781rc"]
+[ext_resource type="PackedScene" uid="uid://dbxj2jfpnkfn7" path="res://assets/nodes/grid_objects/components/MachinePart.tscn" id="4_o24sh"]
+[ext_resource type="PackedScene" uid="uid://b2fmo0i1scr7r" path="res://assets/nodes/miscellaneous/FullPointLight2D.tscn" id="5_ghh0e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxxwg"]
+size = Vector2(46, 38)
+
+[node name="Hub" type="Node2D"]
+script = ExtResource("1_05n0u")
+
+[node name="HubMenu" parent="." instance=ExtResource("2_2la7v")]
+offset_top = -50.0
+offset_bottom = -50.0
+scale = Vector2(0.25, 0.245)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+z_index = 10
+y_sort_enabled = true
+position = Vector2(0, -2)
+texture = ExtResource("3_781rc")
+region_enabled = true
+region_rect = Rect2(0, 0, 52, 52)
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -7.0
+offset_top = -17.0
+offset_right = 7.0
+offset_bottom = -2.0
+focus_mode = 0
+
+[node name="MachinePart" parent="." instance=ExtResource("4_o24sh")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 40
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_cxxwg")
+
+[node name="FullPointLight2D" parent="." instance=ExtResource("5_ghh0e")]
+scale = Vector2(2, 2)
+radius = 1.0
+intensity = 4.42
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

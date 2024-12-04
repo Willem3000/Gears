@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2fmo0i1scr7r"]
+
+[ext_resource type="Script" path="res://assets/scripts/FullPointLight2D.gd" id="1_6swej"]
+[ext_resource type="Texture2D" uid="uid://svxpacpwvuf4" path="res://assets/sprites/LightMask.png" id="2_kdkvh"]
+
+[node name="FullPointLight2D" type="Node2D"]
+script = ExtResource("1_6swej")
+radius = 0.847059
+intensity = 2.32
+
+[node name="GroundLight" type="PointLight2D" parent="."]
+light_mask = 3
+color = Color(0.847059, 1, 1, 1)
+energy = 2.32
+blend_mode = 1
+shadow_enabled = true
+shadow_color = Color(0.580228, 0.580228, 0.580228, 1)
+texture = ExtResource("2_kdkvh")
+
+[node name="ObjectLight" type="PointLight2D" parent="."]
+light_mask = 3
+color = Color(0.847059, 1, 1, 1)
+energy = 2.32
+blend_mode = 1
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = ExtResource("2_kdkvh")
